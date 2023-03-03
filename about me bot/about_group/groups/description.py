@@ -3,9 +3,15 @@ from discord.ext import commands
 from basa.basa import Basa
 from basa.members import Members
 from ..about_me import about
+from funcs.get_about_embed import getAboutEmbed
 
 @about.command(name="description", description="set description")
-async def setDescription(ctx: commands.context.Context, value: str):
+async def setDescription(ctx: commands.context.Context, value: str | None):
+    if value != None:
+        if len(value) > 4096:
+            await ctx.send("Text is too long", ephemeral=True)
+            return
+
     authorId = ctx.author.id
     if not await Basa.isMemberInBasa(id=authorId):
         await Basa.makeNewMember(id=authorId)
@@ -16,7 +22,8 @@ async def setDescription(ctx: commands.context.Context, value: str):
         id=authorId,
         member=member
     )
-    try: 
-        await ctx.message.add_reaction("✅")
-    except discord.errors.NotFound:
-        await ctx.send("✅", ephemeral=True)
+    await ctx.send(
+        "The message has been updated✅",
+        ephemeral=True,
+        embed= await getAboutEmbed(userid=ctx.author.id)
+    )

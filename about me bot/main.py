@@ -12,10 +12,19 @@ import about_group.groups.image
 import about_group.groups.image_thumbnail
 import about_group.groups.title
 
-import context_menu.context_menu
+import context_menus.user_context_menu
+import context_menus.set_title_context_menu
+import context_menus.set_image_context_menu
+import context_menus.set_description_context_menu
+import context_menus.set_author_icon_context_menu
+import context_menus.set_author_title_context_menu
+
 
 import commands.delete
 
-
+#
+#@bot.listen()
+#async def on_ready():
+#    await bot.tree.sync()
 
 bot.run("")

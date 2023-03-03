@@ -35,13 +35,3 @@ class Basa:
         with open(f"members/member{id}.pickle", 'rb') as f:
             try: return pickle.load(f)
             except EOFError: return Members()
-        
-
-if __name__ == "__main__":
-    import asyncio
-
-    async def main():
-        pass
-        
-
-    asyncio.run(main())

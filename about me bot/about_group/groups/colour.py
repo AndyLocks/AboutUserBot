@@ -3,6 +3,7 @@ from discord.ext import commands
 from basa.basa import Basa
 from basa.members import Members
 from ..about_me import about
+from funcs.get_about_embed import getAboutEmbed
 
 @about.command(name="colour", description="set Colour")
 async def setBodyColour(ctx: commands.context.Context, colour: discord.Colour):
@@ -16,7 +17,8 @@ async def setBodyColour(ctx: commands.context.Context, colour: discord.Colour):
         id=authorId,
         member=member
     )
-    try: 
-        await ctx.message.add_reaction("✅")
-    except discord.errors.NotFound:
-        await ctx.send("✅", ephemeral=True)
+    await ctx.send(
+        "The message has been updated✅",
+        ephemeral=True,
+        embed= await getAboutEmbed(userid=ctx.author.id)
+    )
